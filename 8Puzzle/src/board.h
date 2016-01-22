@@ -8,9 +8,14 @@
 #ifndef BOARD_H_
 #define BOARD_H_
 
-namespace CJCU {
+namespace CJCU
+{
 
-class Board {
+class Board
+{
+private:
+	int board[]
+
 public:
 	Board();
 	virtual ~Board();

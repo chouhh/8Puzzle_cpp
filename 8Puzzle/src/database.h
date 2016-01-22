@@ -8,8 +8,8 @@
 #ifndef DATABASE_H_
 #define DATABASE_H_
 
-#include "Record.h"
-#include "Board.h"
+#include "record.h"
+#include "board.h"
 
 namespace CJCU
 {

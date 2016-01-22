@@ -5,17 +5,17 @@
  *      Author: sjean
  */
 
-#include "Board.h"
+#include "board.h"
 
 namespace CJCU {
 
 Board::Board() {
-	// TODO Auto-generated constructor stub
+
 
 }
 
 Board::~Board() {
-	// TODO Auto-generated destructor stub
+
 }
 
 } /* namespace CJCU */

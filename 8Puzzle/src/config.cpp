@@ -1,12 +1,13 @@
 /*
- * Record_test.cpp
+ * config.cpp
  *
  *  Created on: 2016¦~1¤ë22¤é
  *      Author: sjean
  */
 
-#include "Record.h"
+#include "config.h"
 
 namespace CJCU {
+
 
 } /* namespace CJCU */

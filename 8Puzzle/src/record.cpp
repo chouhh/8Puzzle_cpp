@@ -5,13 +5,13 @@
  *      Author: sjean
  */
 
-#include "Record.h"
+#include "record.h"
 
 namespace CJCU {
 
 Record::Record()
 {
-
+	data = 0;
 }
 
 Record::~Record()
