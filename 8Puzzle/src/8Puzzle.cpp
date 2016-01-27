@@ -100,6 +100,23 @@ bool is_legal_move(int x, int y, int d) // check whether the move on the directi
 	}
 }
 
+bool has_existed(int b[3][3])
+{
+	long long int code = encode(b,0) / 16;
+
+	for (int i=0; i<num_data; i++)
+	{
+		long long int existed_code = data[i] / 16;
+
+		if (existed_code == code)
+		{
+			return true;
+		}
+	}
+
+	return false;
+}
+
 int main()
 {
 	int board[3][3] = {{1,2,3},{8,0,4},{7,6,5}}; // initial the goal board
