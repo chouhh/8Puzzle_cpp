@@ -13,21 +13,21 @@ using namespace std;
 
 long long int data[362880]; // 9! size
 int num_data;
-int dir[4][2] = {{-1,0},{0,1},{1,0},{0,-1}}; // up, right, down, left
+int dir[4][2] = {{0,-1},{1,0},{0,1},{-1,0}}; // up, right, down, left
 
 long long int encode(int b[3][3], int d) // encode the board
 {
-	long long result = 0;
+	long long int result = 0;
 
 	for (int i=0; i<3; i++)
 	{
 		for (int j=0; j<3; j++)
 		{
-			result = (result << 4) + b[j][i];
+			result = (result << 4) + b[i][j];
 		}
 	}
 
-	result += d;
+	result = (result << 4) + d;
 
 	return result;
 }
@@ -148,26 +148,30 @@ int main()
 	data[0] = encode(board,depth);
 	num_data = 1;
 
-	while (visit_pos < num_data) // has further move
+	while (visit_pos <= num_data-1) // has further move
 	{
 		get_board(data[visit_pos], board);
 		depth = get_depth(data[visit_pos]);
+		int x = get_blank_x(board);
+		int y = get_blank_y(board);
 
 		for (int i=0; i<4; i++) // consider 4 direction moves
 		{
-			int x = get_blank_x(board);
-			int y = get_blank_y(board);
-
-			if (is_legal_move(x,y,i) && !has_existed(board))
+			if (is_legal_move(x,y,i))
 			{
 				int new_board[3][3];
 				make_move(board,x,y,i,new_board);
-				data[num_data] = encode(new_board,depth+1);
-				num_data++;
+				if (!has_existed(new_board))
+				{
+					data[num_data] = encode(new_board,depth+1);
+					num_data++;
+					cout << "num_data = " << num_data << endl;
+				}
 			}
 		}
 
 		visit_pos++; // visit next board
+		cout << "visit_pos = " << visit_pos << endl;
 	}
 
 	cout << "num_data = " << num_data;
