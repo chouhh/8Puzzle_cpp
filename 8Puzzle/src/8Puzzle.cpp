@@ -11,7 +11,7 @@
 
 using namespace std;
 
-long long int data[362880]; // 9! size
+long long int data[362]; // 9! size
 int num_data;
 int dir[4][2] = {{0,-1},{1,0},{0,1},{-1,0}}; // up, right, down, left
 
