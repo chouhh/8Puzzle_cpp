@@ -8,10 +8,11 @@
 
 #include <iostream>
 #include <cstring>
+#include <cstdlib>
 
 using namespace std;
 
-long long int data[362]; // 9! size
+long long int *data; // 9! size
 int num_data;
 int dir[4][2] = {{0,-1},{1,0},{0,1},{-1,0}}; // up, right, down, left
 
@@ -95,7 +96,7 @@ bool has_existed(int b[3][3])
 
 	for (int i=0; i<num_data; i++)
 	{
-		long long int existed_code = data[i] >> 4;
+		long long int existed_code = *(data+i) >> 4;
 
 		if (existed_code == code)
 		{
@@ -138,20 +139,38 @@ int get_blank_y(int b[3][3])
 	return -1;
 }
 
+void show_board(int b[3][3])
+{
+	cout << "------------" << endl;
+
+	for (int i=0; i<3; i++)
+	{
+		for (int j=0; j<3; j++)
+		{
+			cout << b[i][j] << " ";
+		}
+
+		cout << endl;
+	}
+
+	cout << "------------" << endl;
+}
+
 int main()
 {
 	int board[3][3] = {{1,2,3},{8,0,4},{7,6,5}}; // initial the goal board
 	int depth = 0;
 	int visit_pos = 0;
 
-	memset(data,-1,sizeof(data));
-	data[0] = encode(board,depth);
+	data = (long long int*) malloc(328860 * 8);
+	memset(data,-1,328860 * 8);
+	*(data+0) = encode(board,depth);
 	num_data = 1;
 
 	while (visit_pos <= num_data-1) // has further move
 	{
-		get_board(data[visit_pos], board);
-		depth = get_depth(data[visit_pos]);
+		get_board(*(data+visit_pos), board);
+		depth = get_depth(*(data+visit_pos));
 		int x = get_blank_x(board);
 		int y = get_blank_y(board);
 
@@ -163,9 +182,10 @@ int main()
 				make_move(board,x,y,i,new_board);
 				if (!has_existed(new_board))
 				{
-					data[num_data] = encode(new_board,depth+1);
+					*(data+num_data) = encode(new_board,depth+1);
 					num_data++;
 					cout << "num_data = " << num_data << endl;
+					show_board(new_board);
 				}
 			}
 		}
